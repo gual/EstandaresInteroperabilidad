@@ -128,11 +128,11 @@ _Fuente:_ _alexbilbie.com_
 
 #### Autenticación y Autorización con OpenID Connect
 
-OpenID Connect (OIDC) es un protocolo que aumenta al protocolo OAuth2 agrgando datos de identidad del usuario a través de tokens firmados JWT; esto le permite ofrecer tanto autenticación como autorización, por lo que se considera más completo.
+OpenID Connect (OIDC) es el reemplazo de OpenID2 y es un protocolo que aumenta al protocolo OAuth2 agregando datos de identidad del usuario alamcenados en tokens firmados (JWT); esto le permite ofrecer tanto autenticación como autorización, por lo que se considera más completo.
 
-OpenID Connect se basa en el concepto de institución, que se define como un conjunto de atributos que identifican a los usuarios de forma exclusiva y que permite a las aplicaciones cliente confiar en la autenticación realizada por un proveedor de OpenID Connect para verificar la institución de un usuario.
+OpenID Connect se basa en el concepto de un proveedor de identidad de confianza, que es responsable de ofrecer un conjunto de atributos que identifican a los usuarios de forma exclusiva y que permite a las aplicaciones cliente confiar en la autenticación para verificar a un usuario. Esto elimina la necesidad de que los servicios conozcan o almacenen credenciales de usuarios finales.
 
-OpenID Connect utiliza mensajes JSON sobre HTTPS y se recomienda su uso sobre versiones anteriores de OpenID que se marcaron como obsoletas. Más detalles sobre el estándard estan [disponibles en este enlace](http://openid.net/connect/faq/)
+OpenID Connect  utiliza mensajes JSON sobre HTTPS y se recomienda su uso sobre versiones anteriores de OpenID que se marcaron como obsoletas. Más detalles sobre el estándard estan [disponibles en este enlace](http://openid.net/connect/faq/)
 
 |       |SAML 2.0|OAUTH 2.0|OpenID Connect|
 ------- | ------ | ------- | -----------
@@ -143,7 +143,7 @@ Formato | SOAP/XML |SOAP/XML - REST/JSON  | REST/JSON
  
 #### Recomendaciones Generales.
 
-Si la institución carece de un mecanismo de autenticación y autorización ya definido, se recomienda utilizar JWT para servicios REST y BASIC para SOAP.
+Si la institución carece de un mecanismo de autenticación y autorización ya definido, se recomienda como mínimo utilizar autenticación mutua TLS con JWT para servicios REST y BASIC para SOAP.
  
 Si la institución ya cuenta con un mecanismo de autenticación y autorización, se recomienda mantener este mecanismo y solo realizar acciones de documentación y respaldo de su funcionamiento. 
 
@@ -151,7 +151,7 @@ Se recomienda la implementación de OAuth2 u OpenID Connect a corto o mediano pl
 
 Es necesario asegurarse que a las funciones administrativas de autenticación y autorización del servicio web solamente puedan acceder administradores del servicio y no así consumidores.
  
-Para REST se sugiere implementar un Administrador de APIs (Api Gateway). Esto posibilita aplicarlo transversalmente a todos los servicios web (tanto la autenticación como la autorización), además de que provee otros mecanismos de control como listas de acceso, logs, límite de solicitudes, etc. Dependiendo de la herramienta que se utilice, las características pueden variar, sin embargo se sugiere el uso de Kong por ser una herramienta completa.
+Para REST se sugiere implementar un Administrador de APIs (Api Gateway). Esto posibilita aplicarlo transversalmente a todos los servicios web (tanto la autenticación como la autorización), además de que provee otros mecanismos de control como listas de acceso, logs, límite de solicitudes, etc. Dependiendo de la herramienta que se utilice, las características pueden variar, sin embargo se sugiere el [uso de Kong](https://konghq.com/kong-community-edition/) por ser una herramienta completa.
 
 Si la naturaleza del servicio es transaccional, se recomienda necesariamente aplicar un mecanismo de autorización.
 
