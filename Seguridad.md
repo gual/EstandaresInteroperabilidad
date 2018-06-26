@@ -110,6 +110,10 @@ Otorgamiento de código de autorización (Authorization Code Grant): Usado comú
 El flujo es el siguiente: el cliente redirecciona al usuario al servidor de autorización; entonces se solicita al usuario ingresar sus credenciales en el servidor de autorización y aprobar la solicitud del cliente; luego el cliente —con el permiso que ya dio el usuario—, negocia un token de acceso con el servidor de autorización (es una llamada en favor de un usuario, el usuario y el cliente son distintos).
 
 OAuth resulta complejo en su implementación; sin embargo, destaca cuando se espera contar con una gran cantidad de servicios web, ya que al tratarse de un servicio centralizado, su administración resulta más sencilla de aplicar transversalmente.
+Qué flujo de autorización se debe usar: 
+[alt text](https://alexbilbie.com/images/oauth-grants.svg "Selección de flujo de Autorización")
+
+*Fuente: https://alexbilbie.com *
 
 #### Autenticación y Autorización con OpenID Connect
 
