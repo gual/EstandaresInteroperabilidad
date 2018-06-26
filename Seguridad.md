@@ -82,15 +82,15 @@ La autenticación por medio de certificados se realiza solicitando el certificad
 
 Cómo usar autenticación mutua TLS para proteget mi servicio web?
 
-* [APACHE](http://manintheit.org/security/ssl-client-certificate-authentication-with-apache/ "APACHE" target="_blank")
+* [APACHE](http://manintheit.org/security/ssl-client-certificate-authentication-with-apache/)
 
-* [JBOSS](https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1/helloworld-mutual-ssl-secured){:target="_blank"}
+* [JBOSS](https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1/helloworld-mutual-ssl-secured)
 
-* [WildFly](https://github.com/wildfly/quickstart/tree/13.x/helloworld-mutual-ssl-secured){:target="_new"}
+* [WildFly](https://github.com/wildfly/quickstart/tree/13.x/helloworld-mutual-ssl-secured)
 
-* [NGINX](https://www.nginx.com/resources/admin-guide/nginx-https-upstreams/){:target="_new"}
+* [NGINX](https://www.nginx.com/resources/admin-guide/nginx-https-upstreams/)
 
-* [IIS](https://blogs.msdn.microsoft.com/asiatech/2014/02/12/how-to-configure-iis-client-certificate-mapping-authentication-for-iis7/){:target="_new"}
+* [IIS](https://blogs.msdn.microsoft.com/asiatech/2014/02/12/how-to-configure-iis-client-certificate-mapping-authentication-for-iis7/)
 
 Si se va a implementar la autenticación con certificados digitales, es necesario comprobar que el certificado haya sido entregado por una Autoridad Certificadora de confianza, que no haya expirado y no haya sido revocado.
  
