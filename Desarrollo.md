@@ -504,4 +504,5 @@ Si bien existe una gran cantidad de códigos HTTP, los más utilizados son:
 | 500 | Internal Server Error | La solicitud parece correcta, pero un problema ha ocurrido en el servidor. El cliente no puede hacer nada al respecto.
  
 ### Referencias:
-[Estándares de APIs Gobierno de Argentina](https://github.com/argob/estandares/blob/master/estandares-apis.md)
+* [Estándares de APIs de la Casa Blanca, EE.UU.](https://github.com/WhiteHouse/api-standards)
+* [Estándares de APIs Gobierno de Argentina](https://github.com/argob/estandares/blob/master/estandares-apis.md)
