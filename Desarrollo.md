@@ -19,7 +19,7 @@ Con base a estándares y mejores prácticas utilizadas a nivel internacional se 
     * [Tipos de Servicios Web](#tipos-de-servicios-web)
         * [REST](#rest)
             * [Buenas Prácticas](#buenas-prácticas-1)
-            * [Validación de Mensaje](#validación-de-mensaje-1)
+            * [Validación de Mensaje](#validación-de-mensajes-1)
             * [Versionamiento](#versionamiento-1)
             * [Manejo de Errores](#manejo-de-errores-1)
             * [Codificación](#codificacion-1)  
@@ -242,6 +242,11 @@ Por ejemplo, para validar la estructura JSON utilizar:
     }
 }
 ```
+Herramientas de desarrollo de JSON Schema: 
+
+* Ejmeplos de esquemas: http://json-schema.org/examples.html
+* Validador de esquema en línea: https://www.jsonschemavalidator.net/
+* Validación de JSON Schema para Java, Python, PHP, Ruby, etc.: http://json-schema.org/implementations.html#validators
 
 ##### Versionamiento.
 
