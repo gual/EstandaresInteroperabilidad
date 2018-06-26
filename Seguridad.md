@@ -133,6 +133,13 @@ OpenID Connect (OIDC) es un protocolo que aumenta al protocolo OAuth2 agrgando d
 OpenID Connect se basa en el concepto de institución, que se define como un conjunto de atributos que identifican a los usuarios de forma exclusiva y que permite a las aplicaciones cliente confiar en la autenticación realizada por un proveedor de OpenID Connect para verificar la institución de un usuario.
 
 OpenID Connect utiliza mensajes JSON sobre HTTPS y se recomienda su uso sobre versiones anteriores de OpenID que se marcaron como obsoletas. Más detalles sobre el estándard estan [disponibles en este enlace](http://openid.net/connect/faq/)
+
+|       |SAML 2.0|OAUTH 2.0|OpenID Connect|
+------- | ------ | ------- | -----------
+Qué es? |Estándar abierto para autenticar y autorizar|Estándar abierto para autorizar|Estándar abierto que agrega autenticación a OAUTH2.0|
+Historia| Desarrollado por OASIS en 2001| Desarrollado por Twitter y Google en 2004| Desarrollado por la Fundación OpenID en 2014|
+Uso Principal| SSO de aplicaciones cliente/servidor| Autorizar Servicios Web/APIs| SSO para usuarios finales|
+Formato | SOAP/XML |SOAP/XML - REST/JSON  | REST/JSON 
  
 #### Recomendaciones Generales.
 
@@ -140,9 +147,7 @@ Si la institución carece de un mecanismo de autenticación y autorización ya d
  
 Si la institución ya cuenta con un mecanismo de autenticación y autorización, se recomienda mantener este mecanismo y solo realizar acciones de documentación y respaldo de su funcionamiento. 
 
-Se recomienda la implementación de OAuth2 u OpenID Connect a mediano o largo plazo. 
-
-Se sugiere utilizar un solo mecanismo de autenticación y autorización, esto para evitar complejidad administrativa en el largo plazo.
+Se recomienda la implementación de OAuth2 u OpenID Connect a corto o mediano plazo.  Se sugiere utilizar un mecanismo centralizado de autenticación y autorización para los servicios web, esto para evitar complejidad administrativa en el largo plazo.
 
 Es necesario asegurarse que a las funciones administrativas de autenticación y autorización del servicio web solamente puedan acceder administradores del servicio y no así consumidores.
  
