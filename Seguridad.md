@@ -82,9 +82,9 @@ La autenticación por medio de certificados se realiza solicitando el certificad
 
 Cómo usar autenticación mutua TLS para proteget mi servicio web?
 
-* [APACHE] (http://manintheit.org/security/ssl-client-certificate-authentication-with-apache/){:target="_new"}
+* [APACHE] (http://manintheit.org/security/ssl-client-certificate-authentication-with-apache/){:target="_blank"}
 
-* [JBOSS](https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1/helloworld-mutual-ssl-secured){:target="_new"}
+* [JBOSS](https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1/helloworld-mutual-ssl-secured){:target="_blank"}
 
 * [WildFly](https://github.com/wildfly/quickstart/tree/13.x/helloworld-mutual-ssl-secured){:target="_new"}
 
