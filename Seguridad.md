@@ -78,11 +78,9 @@ Es recomendable implementar procedimientos de uso y ciclo de vida de las contras
  
 #### Autenticación con Certificados Electrónicos.
 
-La autenticación por medio de certificados se realiza solicitando el certificado digital del consumidor del servicio web (cliente) y verificando cada mensaje enviado contra dicho certificado, lo que garantiza que el consumidor del servicio es quien dice ser.
+La autenticación por medio de certificados se realiza solicitando el certificado digital del consumidor del servicio web (cliente) y verificando cada mensaje enviado contra dicho certificado, lo que garantiza que el consumidor del servicio es quien dice ser. Este mecanismo es inefinciente si estamos autenticando personas pero es especialmente útil cuando el cliente es otro servicio web ya que se integra dentro del prototocolo HTTPS y de esta forma asegura la identificación, la autenticación, la confidencialidad y la integridad. Esta modalidd se conce como [identificación mutua TLS](https://www.ibm.com/support/knowledgecenter/es/SSFKSJ_7.5.0/com.ibm.mq.sec.doc/q009940_.htm)  
 
-Si bien es posible realizar la autenticación por este medio, la administración de certificados para un servicio web con una gran cantidad de clientes es compleja, por lo que no se recomienda su uso existiendo otros medios de autenticación más sencillos e igualmente seguros.
-
-Si se va a implementar la autenticación con certificados digitales, es necesario comprobar que el certificado haya sido entregado por una Autoridad Certificadora, que no haya expirado y no haya sido revocado.
+Si se va a implementar la autenticación con certificados digitales, es necesario comprobar que el certificado haya sido entregado por una Autoridad Certificadora de confianza, que no haya expirado y no haya sido revocado.
  
 #### Autenticación con JWT (JSON Web Tokens).
  
