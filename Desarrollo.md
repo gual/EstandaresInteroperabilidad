@@ -1,4 +1,4 @@
-# Estandares de Desarrollo
+# Estandares de Desarrollo de Servicios Web
 
 Con base a estándares y mejores prácticas utilizadas a nivel internacional se sugiere la utilización de los siguientes lineamientos para la construcción de servicios web.
 
