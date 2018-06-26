@@ -111,9 +111,9 @@ El flujo es el siguiente: el cliente redirecciona al usuario al servidor de auto
 
 OAuth resulta complejo en su implementación; sin embargo, destaca cuando se espera contar con una gran cantidad de servicios web, ya que al tratarse de un servicio centralizado, su administración resulta más sencilla de aplicar transversalmente.
 Qué flujo de autorización se debe usar: 
-[alt text](https://alexbilbie.com/images/oauth-grants.svg "Selección de flujo de Autorización")
+![alt text](https://alexbilbie.com/images/oauth-grants.svg "Selección de flujo de Autorización")
 
-*Fuente: https://alexbilbie.com *
+*Fuente: alexbilbie.com *
 
 #### Autenticación y Autorización con OpenID Connect
 
