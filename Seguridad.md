@@ -113,13 +113,11 @@ OAuth resulta complejo en su implementación; sin embargo, destaca cuando se esp
 
 #### Autenticación y Autorización con OpenID Connect
 
-OpenID Connect es un protocolo que al basarse sobre los protocolos de OAuth2 y OpenID provee tanto autenticación como autorización, por lo que se considera más completo.
-
-En la actualidad, su especificación se realiza con mensajes JSON sobre HTTPS y se recomienda su uso sobre versiones anteriores de OpenID que se marcaron como obsoletas.
+OpenID Connect (OIDC) es un protocolo que aumenta al protocolo OAuth2 agrgando datos de identidad del usuario a través de tokens firmados JWT; esto le permite ofrecer tanto autenticación como autorización, por lo que se considera más completo.
 
 OpenID Connect se basa en el concepto de institución, que se define como un conjunto de atributos que identifican a los usuarios de forma exclusiva y que permite a las aplicaciones cliente confiar en la autenticación realizada por un proveedor de OpenID Connect para verificar la institución de un usuario.
- 
-Es necesario recalcar que su implementación es compleja con relación a otros mecanismos como JWT.
+
+OpenID Connect utiliza mensajes JSON sobre HTTPS y se recomienda su uso sobre versiones anteriores de OpenID que se marcaron como obsoletas. Más detalles sobre el estándard estan [disponibles en este enlace](http://openid.net/connect/faq/)
  
 #### Recomendaciones Generales.
 
