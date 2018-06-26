@@ -80,17 +80,17 @@ Es recomendable implementar procedimientos de uso y ciclo de vida de las contras
 
 La autenticación por medio de certificados se realiza solicitando el certificado digital del consumidor del servicio web (cliente) y verificando cada mensaje enviado contra dicho certificado, lo que garantiza que el consumidor del servicio es quien dice ser. Este mecanismo es tedioso si estamos autenticando personas/navegadores pero es especialmente útil para autenticar otro servicio web ya que se integra dentro del prototocolo HTTPS y de esta forma asegura la identificación, la autenticación, la confidencialidad y la integridad. Esta modalidad se conce como [autenticación mutua TLS](https://www.codeproject.com/Articles/326574/An-Introduction-to-Mutual-SSL-Authentication)  
 
-Cómo usar autenticacion mutua TLS en mi servidor web?
+Cómo usar autenticación mutua TLS para proteget mi servicio web?
 
-<a href="http://manintheit.org/security/ssl-client-certificate-authentication-with-apache/" target="_new">APACHE</a>
+* [APACHE] (http://manintheit.org/security/ssl-client-certificate-authentication-with-apache/){:target="_new"}
 
-<a href="https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1/helloworld-mutual-ssl-secured" target="_blank">JBOSS</a> 
+* [JBOSS](https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.1/helloworld-mutual-ssl-secured){:target="_new"}
 
-<a target="_new" href="https://github.com/wildfly/quickstart/tree/13.x/helloworld-mutual-ssl-secured">WildFly</a>
+* [WildFly](https://github.com/wildfly/quickstart/tree/13.x/helloworld-mutual-ssl-secured){:target="_new"}
 
-<a target="_new" href="https://www.nginx.com/resources/admin-guide/nginx-https-upstreams/">NGINX</a>
+* [NGINX](https://www.nginx.com/resources/admin-guide/nginx-https-upstreams/){:target="_new"}
 
-<a target="_new" href="https://blogs.msdn.microsoft.com/asiatech/2014/02/12/how-to-configure-iis-client-certificate-mapping-authentication-for-iis7/">IIS</a>
+* [IIS](https://blogs.msdn.microsoft.com/asiatech/2014/02/12/how-to-configure-iis-client-certificate-mapping-authentication-for-iis7/){:target="_new"}
 
 Si se va a implementar la autenticación con certificados digitales, es necesario comprobar que el certificado haya sido entregado por una Autoridad Certificadora de confianza, que no haya expirado y no haya sido revocado.
  
