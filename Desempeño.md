@@ -31,7 +31,7 @@ Es recomendable que los servicios web sean sometidos a un conjunto de pruebas de
 
 En base a las mediciones de los resultados de las pruebas de rendimiento (carga y estrés), tomar decisiones en cuanto a los elementos que necesitarán redundancia, ya sean de software o hardware. Además es posible verificar el rendimiento de los servicios web realizando un análisis de los tiempos de respuesta en los registros de eventos. 
 
-Herramienta de pruebas de rendimiento:
+Herramientas de pruebas de rendimiento:
 
 [Locus](https://locust.io/)
 
@@ -42,6 +42,7 @@ La infraestructura encargada de proveer los servicios web debe tener la capacida
 Se recomienda aplicar el balanceo de carga en los servicios web que se espera tengan una cantidad alta de instituciones consumidoras. Hay que evaluar la cantidad de solicitudes que el servicio web puede manejar en base a pruebas de rendimiento y de acuerdo a ese límite establecer nuevos recursos que permitan manejar una mayor cantidad de solicitudes.
 
 Si bien esto aumentará la cantidad de solicitudes que se puede manejar, es conveniente revisar si el servicio web no tiene algún problema que evite que pueda responder a más solicitudes, como conexiones no cerradas a la base de datos, no limpiar recursos en la memoria, consultas lentas a la base de datos u otros que pudieran estar afectando el rendimiento del servicio web. La principal desventaja es que se necesita una mayor configuración para poner en marcha el balanceo de carga y el costo que esto implica.
+
 Herramientas de balanceo de carga:
 
 [Nginx](http://nginx.org/en/docs/http/load_balancing.html)
