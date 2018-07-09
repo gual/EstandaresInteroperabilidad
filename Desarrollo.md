@@ -99,7 +99,7 @@ Los principales tipos de formatos de datos de representación de la información
 #### JSON (JavaScript Object Notation o Notación de Objetos JavaScript).
 
 Es un formato de representación de datos liviano, simple de ser leído y entendido tanto por humanos como por máquinas. Es el principal tipo de formato de dato para el intercambio de información en un servicio de interoperabilidad REST y, en su forma más simple, se caracteriza por el uso de una colección de pares nombre/valor que podrían ser anidados. A continuación se observa su estructura:
-```json
+```
 {
     "nombre1": "valor1", // par nombre valor
     "nombre2": "valor2",
@@ -216,9 +216,10 @@ Si se utiliza paginación se debe establecer un número de **elementosPorPagina*
 Además, se sugiere enviar opcionalmente en la respuesta el header link con información referente a la paginación ("first" la primera página, "prev" la página anterior, "next" la siguiente página y "last" la última página).
 
 ```html
-Link: 	<https://miempresa.gob.sv/servicio?limite=20&intervalo=0>;rel="first", 
-      	<https://miempresa.gob.sv/servicio?limite=20&intervalo=40>;rel="prev", 
-      	<https://miempresa.gob.sv/servicio?limite=20&intervalo=80>;rel="next",	    <https://miempresa.gob.sv/servicio?limite=20&intervalo=180>;rel="last"
+Link: <https://miempresa.gob.sv/servicio?limite=20&intervalo=0>;rel="first", 
+      <https://miempresa.gob.sv/servicio?limite=20&intervalo=40>;rel="prev", 
+      <https://miempresa.gob.sv/servicio?limite=20&intervalo=80>;rel="next",
+      <https://miempresa.gob.sv/servicio?limite=20&intervalo=180>;rel="last"
 ```
 
 **Ordenamiento**
@@ -371,7 +372,7 @@ Para el manejo de errores, se recomienda utilizar la siguiente estructura mínim
 ```
 
 En caso de que existan muchos errores se puede utilizar la siguiente estructura JSON:
-```json
+```
 {
     "codigo": "Código del error",
     "error": "Descripción detallada del error",
@@ -456,7 +457,7 @@ Para mantener la consistencia en el desarrollo de los servicios SOAP, se sugiere
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> 
-<wsdl:types>
+	<wsdl:types>
 		<!-- definiciones de los tipos de datos (XSD) -->
 	</wsdl:types>
 	<wsdl:message>
@@ -467,10 +468,10 @@ Para mantener la consistencia en el desarrollo de los servicios SOAP, se sugiere
 	</wsdl:portType>
 	<wsdl:binding>
 		<!-- especificación del protocolo y formato de dato para un portType --> 
-</wsdl:binding>
+	</wsdl:binding>
 	<wsdl:service>
 		<!-- colección de recursos finales (endpoints) --> 
-</wsdl:service>
+	</wsdl:service>
 </wsdl:definitions>
 ```
 
