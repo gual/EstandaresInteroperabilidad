@@ -2,17 +2,17 @@
 
 La institución publicadora del servicio de web se esforzará para que el servicio esté disponible de forma continua y sin interrupción. A continuación se detallan las características más importantes sobre la disponibilidad de los servicios web.
 
-##Índice
+## Índice
 
-[Redundancia](#redundancia)
+* [Redundancia](#redundancia)
 
-[Pruebas de Rendimiento](#pruebas-de-rendimiento)
+* [Pruebas de Rendimiento](#pruebas-de-rendimiento)
 
-[Balanceo de Carga](#balanceo-de-carga)
+* [Balanceo de Carga](#balanceo-de-carga)
 
-[Cacheado](#cacheado)
+* [Cacheado](#cacheado)
 
-[Monitoreo](#monitoreo)
+* [Monitoreo](#monitoreo)
 
 ## Redundancia.
 
