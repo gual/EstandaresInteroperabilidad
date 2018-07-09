@@ -88,7 +88,7 @@ Es necesario documentar los servicios ofrecidos por cada institución. Para cada
 | Datos de Salida | Detalle de la estructura de respuesta del servicio | Requerido |
 | Tipo de Conexión | Medio  por  el  cual  se  transmiten  los  datos  del proveedor al cliente | Requerido |
 | Software Relacionado | Vínculos de software relacionado al servicio | |
- 
+
 ## Anexos.
 
 ### Tipos de formatos de representación de datos.
@@ -111,7 +111,7 @@ Es un formato de representación de datos liviano, simple de ser leído y entend
 ```
 
 Como ejemplo se describe el objeto “persona” en formato JSON:
-```
+```json
 {
     "dui": "12345678-9",
     "nombres": "Juan",
@@ -127,7 +127,7 @@ Es un formato de representación de datos flexible que define un conjunto de reg
 La estructura del documento XML tiene que contener la declaración <xml> que especifique la versión (version) y la codificación (encoding) del documento, esto con el fin de mejorar la interoperabilidad de los datos (al conocer la versión y la codificación se evitan errores de interpretación).
 
 Como ejemplo se detalla el objeto “persona” en formato XML:
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <persona>
     <dui>012345678-9</dui>
@@ -145,7 +145,6 @@ Al momento de la redacción del documento los tipos de servicios web más utiliz
 
 REST es un estilo de arquitectura para sistemas distribuidos y, si bien no depende de ningún protocolo, en su gran mayoría se utiliza sobre HTTP (Hypertext Transfer Protocol).
 Este estilo de arquitectura define un conjunto de principios para su implementación:
-    
 * Interfaz uniforme. Todos los recursos son identificados por una URI (Uniform Resource Identifier).
 * Interacciones sin almacenamiento del estado (stateless). Cada mensaje tiene información suficiente para ser procesado sin necesidad de guardar un estado en el servidor de anteriores mensajes.
 * Permite el uso de caché. Las respuestas pueden ser cacheadas o no por el cliente para optimizar las consultas.
@@ -164,47 +163,151 @@ Para mantener la consistencia en el desarrollo de los servicios REST, se sugiere
 * Usar la notación “camello” (camelCase), que es la práctica de escribir frases compuestas de manera que cada palabra en medio de la frase comience con una letra mayúscula (por ejemplo, fraseEnCamelCase). Utilizar esta notación para nombrar recursos, atributos y parámetros.
 * Aprovechar la naturaleza jerárquica de la URL siempre que un objeto tenga relación con otro.
 
+**Listar elementos**
+
+Al consumir este recurso y no agregar un filtro de búsqueda a la URL, el servicio debe de listar tódos los elementos pertenecientes al recurso que se esta consumiendo. Para no sobrecargar la obtención de los elementos se puede limitar el resultado agregando una paginación por defecto al servicio, la cual puede ser modificada a través de filtros en la URL.
+
 ```
-GET /servicios/1234/instanciasServicios/4321
+GET /servicios 
+# HTTP 200 OK
 ```
 
-Se recomienda no abusar de esta característica y utilizar preferentemente solo un nivel de recurso en el URL.
+**Filtrar lista de elementos**
 
 Usar el símbolo "?" para filtrar los recursos y "&" para añadir más filtros en el URL.
 ```
+GET /servicios?{filtro1}=valor&{filtroN}=valor
+
+# Filtrando por el id de la Entidad y su estado
 GET /servicios?idEntidad=2345&estado=pendiente
+
+# HTTP 200 OK
 ```
 
-Usar la palabra clave "buscar" en el URL para ejecutar una búsqueda avanzada (se hace una excepción en este caso para utilizar un verbo en lugar de un nombre debido a que se trata de un procesamiento y no de un proceso de lectura como tal).
+**Consultar un elemento**
+
+La consulta a un elemento específico debe de realizarse enviando a través de la URL el parámetro que servirá como llave o identificador del elemento a consultar y ningun otro parámetro de filtro, paginación u ordenamiento.
+
 ```
-GET /buscar?q=nacimiento
+GET /servicios/{id}
+
+# Obteniendo el elemento 12345 del servicio
+GET /servicio/12345
+
+# HTTP 200 OK
 ```
 
-Para las paginaciones (en caso de listas con una cantidad alta de datos) se sugiere contar con los parámetros “limite” (cantidad de datos devueltos por el recurso) e “indice” (índice del primer elemento devuelto por el recurso) en el URL.
+**Paginación**
+
+Para las paginaciones (en caso de listas con una cantidad alta de datos) se sugiere contar con los parámetros “pagina” (numero de página del primer elemento a devolver por el recurso) y "elementosPorPagina" (cantidad de datos a devolver por página por el recurso)  en el URL.
+
 ```
-GET /servicio?limite=10&indice=51
+# Obteniendo los registros del 61 - 90 (elementosPorPagina=30 por defecto)
+GET /servicio?pagina=3
+# HTTP 200 OK
+
+# Obteniendo los registros del 21 - 30
+GET /servicio?pagina=3&elementosPorPagina=10
+# HTTP 200 OK
 ```
+
+Si se utiliza paginación se debe establecer un número de **elementosPorPagina** por defecto (el número normalmente utilizado es de 30 elementos)
 
 Además, se sugiere enviar opcionalmente en la respuesta el header link con información referente a la paginación ("first" la primera página, "prev" la página anterior, "next" la siguiente página y "last" la última página).
-```
-Link: 	<https://miempresa.gob.sv/servicio?limite=20&intervalo=0>;rel="first", 
-      	<https://miempresa.gob.sv/servicio?limite=20&intervalo=40>;rel="prev", 
-      	<https://miempresa.gob.sv/servicio?limite=20&intervalo=80>;rel="next",	    <https://miempresa.gob.sv/servicio?limite=20&intervalo=180>;rel="last"
+
+```html
+Link: <https://miempresa.gob.sv/servicio?limite=20&intervalo=0>;rel="first", 
+      <https://miempresa.gob.sv/servicio?limite=20&intervalo=40>;rel="prev", 
+      <https://miempresa.gob.sv/servicio?limite=20&intervalo=80>;rel="next",
+      <https://miempresa.gob.sv/servicio?limite=20&intervalo=180>;rel="last"
 ```
 
-Para ordenar los recursos se utiliza el parámetro "orden"; por defecto los recursos están ordenados ascendentemente. Para ordenar los recursos de forma descendente, se usa el carácter "-".
+**Ordenamiento**
+
+Para ordenar los recursos se utiliza el parámetro "orden" seguido del nombre de elemento por el cuál se desea ordenar; por defecto los recursos están ordenados ascendentemente. Los elementos por los cuales se es permitido ordenar deberá estar definido en la documentaicón técnica de recurso de la API.
+
 ```
-GET /servicio?orden=estado,-descripcion
+GET /servicio?orden[elemento1]=asc|desc&orden[elementoN]=asc|desc
+
+# Ordenando por estado Ascendente y fechaRegistro descendente
+GET /servicio?orden[estado]=asc&[fechaRegistro]=desc
+
+# HTTP 200 OK
 ```
+
+**Límite de Consultas**
 
 En el caso de manejar un límite de solicitudes por cliente (rate-limiting), es necesario enviar en la respuesta una cabecera (header) HTTP extra, con información de la cantidad de solicitudes permitidas, la cantidad de solicitudes restantes y el tiempo (timestamp) en el cual estos límites volverán a su estado inicial.
+
 ```
 X-LimiteSolicitudes-Limite: 100
 X-LimiteSolicitudes-Restante: 14
 X-LimiteSolicitudes-Reset: 1499875025
 ```
 
-Utilizar los códigos HTTP para responder a las consultas realizadas por el cliente.
+**Creación de un elmento**
+
+La creación de un elemento implica el envio de un registro o un conjunto de estos que cumplan con los lineamientos establecidos en la documentación Técnica de la API a la cual se le esta solicitando dicha acción. El registro viaja a través del cuerpo de la petición y se recomienda el uso del formato JSON para los valores de entrada.
+
+```
+POST /servicios
+
+# Cuerpo de la petición
+[{
+    "nombre": "Nombre",
+    "descripcion": "Descripcion del registro"
+}]
+
+# HTTP 201 CREATED
+```
+
+Para la validación de los datos de entrada se recomienda el uso de [json-schema](http://json-schema.org/). En el caso del método POST el envío de los registros a crear deberán de estar dentro de un array ya sea que se cree uno o más elementos.
+
+**Modificación de un elemento**
+
+Las modificaciones de los registros se pueden realizar a través de los protocolos PUT o PATCH, la diferencia entre estos es que PUT actualiza todos los campos del registro, mientras que PATCH permite actualizar uno o mas campos del registro. Para poder realizar la actualización es necesario brindar la llave o identificador del registro a modificar a través de la URL.
+
+**PUT**
+
+```
+PUT /servicio/{id}
+
+# Cuerpo de la petición
+{
+    "nombre": "Nombre",
+    "descripcion": "Descripcion del registro"
+}
+
+# HTTP 200 OK
+```
+
+**PATCH**
+
+```
+PATCH /servicio/{id}
+
+# Cuerpo de la petición
+{
+    "descripcion": "Descripcion del registro"
+}
+
+# HTTP 200 OK
+```
+
+Para la validación de los datos de entrada se recomienda el uso de [json-schema](http://json-schema.org/).
+
+**Eliminación de un elemento**
+
+Para la eliminación de un registro es necesario brindar la llave o identificador del registro a modificar a través de la URL.
+
+```
+DELETE /servicio/{id}
+
+# HTTP 204 NO CONTENT
+```
+
+Utilizar los [códigos HTTP](#códigos-respuesta-http) correspondientes para responder a las consultas realizadas por el cliente.
+
 Considerar el cifrado de los parámetros enviados en el URI si estos fueran de alguna manera sensibles.
 
 ##### Validación de Mensajes
@@ -222,7 +325,7 @@ JSON Schema está descrita también en formato JSON; sin embargo, se utiliza par
 Se recomienda que cada objeto identificado en la semántica tenga asociado y publicado su JSON Schema respectivo.
 
 Por ejemplo, para validar la estructura JSON utilizar:
-```
+```json
 {
     "title": "Persona",
     "type": "object",
@@ -261,7 +364,7 @@ GET /v2/servicios
 Todos los problemas que presenten los servicios de interoperabilidad deben ser identificados, de modo que la entidad consumidora de los mismos comprenda los motivos de las fallas.
 
 Para el manejo de errores, se recomienda utilizar la siguiente estructura mínima JSON:
-```
+```json
 {
     "codigo": "Código del error",
     "error": "Descripción detallada del error"
@@ -288,7 +391,7 @@ En caso de que existan muchos errores se puede utilizar la siguiente estructura 
 ```
 
 Por ejemplo, en un servicio de inserción de trámites que se hace de forma masiva y que haya presentado un error, la respuesta esperada es:
-```
+```json
 {
     "codigo": "0003",
     "error": "Error en el procesamiento de la inserción masiva de servicios",
@@ -309,6 +412,30 @@ Por ejemplo, en un servicio de inserción de trámites que se hace de forma masi
 }
 ```
 
+Estos códigos de error deben de retornase en respuesta al cliente utilizando los [códigos HTTP](#códigos-respuesta-http) correspondientes.
+
+```
+POST /servicio
+
+# Respuesta de error del servidor
+{
+    "codigo": "0003",
+    "error": "Error en el procesamiento de la inserción masiva de servicios",
+    "errores": [
+        {
+            "codigo": 1568548,
+            "error": "El servicio no tiene el atributo monto"
+        },
+        {
+            "codigo": 4894564,
+            "error": "El monto del servicio no puede ser negativo"
+        }
+    ]
+}
+
+# HTTP 400 Bad Request
+```
+
 ##### Codificación.
 
 La codificación en el encabezado “content-type” del protocolo HTTP se establecerá de la siguiente manera:
@@ -327,10 +454,10 @@ Se recomienda utilizar la versión 1.2 de SOAP siempre que sea posible.
 Para mantener la consistencia en el desarrollo de los servicios SOAP, se sugiere implementar las siguientes buenas prácticas:
 
 * Las operaciones y mensajes se definen de acuerdo a lo detallado en el archivo WSDL (Web Service Definition Language o lenguaje de definición de servicio web), que tiene la siguiente estructura:
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> 
-<wsdl:types>
+	<wsdl:types>
 		<!-- definiciones de los tipos de datos (XSD) -->
 	</wsdl:types>
 	<wsdl:message>
@@ -341,10 +468,10 @@ Para mantener la consistencia en el desarrollo de los servicios SOAP, se sugiere
 	</wsdl:portType>
 	<wsdl:binding>
 		<!-- especificación del protocolo y formato de dato para un portType --> 
-</wsdl:binding>
+	</wsdl:binding>
 	<wsdl:service>
 		<!-- colección de recursos finales (endpoints) --> 
-</wsdl:service>
+	</wsdl:service>
 </wsdl:definitions>
 ```
 
@@ -356,7 +483,7 @@ El archivo WSDL se tiene que publicar y debe ser accesible por la entidad consum
 
 Los estilos de documentos se definen en el elemento <binding> del archivo
 WSDL como se puede observar a continuación:
-```
+```xml
 <wsdl:binding name="TramiteBinding" type="ns:TramitePortType">
 	<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/> 
 <wsdl:operation name="obtenerTramite">
@@ -391,7 +518,7 @@ Para las restricciones sobre el contenido de los elementos XML se tienen los sig
 * base64binary: representa datos binarios codificados en base 64.
 
 Ejemplo de XSD:
-```
+```xml
 <xs:element name="persona">
     <xs:complexType>
         <xs:sequence>
@@ -411,7 +538,7 @@ Es recomendable que se separe la definición de los tipos de datos del archivo W
 Para el versionamiento en SOAP existen tres opciones que son las más utilizadas:
 
 Versionamiento de la operación: cuando un servicio que tiene muchas operaciones desea modificar solamente una de ellas; para este caso se recomienda aplicar el versionamiento en el nombre de la operación, lo que previene cambios drásticos en el WSDL.
-```
+```xml
 <wsdl:operation name="operacionV1"></wsdl:operation>
 <wsdl:operation name="operacionV2"></wsdl:operation>
 ```
@@ -427,7 +554,7 @@ Se recomienda mantener el tipo de versionamiento que ya se esté utilizando, sin
 ##### Manejo de Errores
 
 Todos los problemas que presenten los servicios de interoperabilidad deben ser identificados, de modo que la entidad consumidora del servicio comprenda el motivo de la falla. Para el tratamiento de errores se recomienda la siguiente estructura XML:
-```
+```xml
 <respuesta>
 	<codigo>Código del error</codigo>
     <error>Descripción detallada del error</error>
@@ -435,7 +562,7 @@ Todos los problemas que presenten los servicios de interoperabilidad deben ser i
 ```
 
 En caso de que existan muchos errores se puede utilizar la siguiente estructura XML:
-```
+```xml
 <respuesta>
 	<codigo>Código del error</codigo>
 	<error>Descripción detallada del error</error>
@@ -454,7 +581,7 @@ En caso de que existan muchos errores se puede utilizar la siguiente estructura 
 ```
 
 A continuación se puede ver un ejemplo del manejo de errores en SOAP:
-```
+```xml
 <respuesta>
     <codigo>0003</codigo>
     <error>Error en el procesamiento de la inserción masiva de trámites</error>
@@ -495,14 +622,14 @@ Si bien existe una gran cantidad de códigos HTTP, los más utilizados son:
 | 206 | Partial Content | El recurso devuelto está incompleto. Típicamente usado con recursos paginados.|
 | 301 | Moved Permanently | El URI solicitado ha sido redireccionado permanentemente a otro recurso. El consumidor debe direccionar estas solicitudes a otro URI. |
 | 302 | Found | El  URI  solicitado  ha  sido  redireccionado temporalmente, el consumidor debe seguir pidiendo este recurso en el futuro. |
-| 400 | Bad Request | Error general para una solicitud que no puede ser procesada (el consumidor no debe repetir la solicitud sin modificarla). | 
-| 401 | Unauthorized | Indica que el consumidor no tiene una identidad definida en el servicio. | 
+| 400 | Bad Request | Error general para una solicitud que no puede ser procesada (el consumidor no debe repetir la solicitud sin modificarla). |
+| 401 | Unauthorized | Indica que el consumidor no tiene una identidad definida en el servicio. |
 | 403 | Forbidden | Indica que el consumidor tiene una identidad definida en el servicio, pero no tiene los permisos para la solicitud que ha realizado. |
 | 404 | Not Found | El recurso solicitado no existe. |
-| 405 | Method Not Allowed | O el método no está soportado o lo relacionado a este recurso no tiene el permiso.
+| 405 | Method Not Allowed | O el método no está soportado o lo relacionado a este recurso no tiene el permiso. |
 | 406 | Not Acceptable | No existe el recurso en el formato solicitado. Por ejemplo, se solicita un recurso en XML pero sólo está disponible en JSON. |
-| 500 | Internal Server Error | La solicitud parece correcta, pero un problema ha ocurrido en el servidor. El cliente no puede hacer nada al respecto.
- 
+| 500 | Internal Server Error | La solicitud parece correcta, pero un problema ha ocurrido en el servidor. El cliente no puede hacer nada al respecto. |
+
 ### Referencias:
 * [Estándares de APIs de la Casa Blanca, EE.UU.](https://github.com/WhiteHouse/api-standards)
 * [Estándares de APIs Gobierno de Argentina](https://github.com/argob/estandares/blob/master/estandares-apis.md)
