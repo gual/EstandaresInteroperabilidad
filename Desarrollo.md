@@ -22,14 +22,14 @@ Con base a estándares y mejores prácticas utilizadas a nivel internacional se 
             * [Validación de Mensaje](#validación-de-mensajes-1)
             * [Versionamiento](#versionamiento-1)
             * [Manejo de Errores](#manejo-de-errores-1)
-            * [Codificación](#codificacion-1)  
+            * [Codificación](#codificación-1)  
         * [SOAP](#soap)
             * [Buenas Prácticas](#buenas-prácticas-2)
             * [Validación de Mensajes](#validación-de-mensajes-2)
             * [Versionamiento](#versionamiento-2)
             * [Manejo de Errores](#manejo-de-errores-2)
             * [Codificación](#codificación-2)
-    * [Códigos de Respuesta HTTP](#códigos-respuesta-http)
+    * [Códigos de Respuesta HTTP](#códigos-de-respuesta-http)
 * [Referencias](#referencias)
 
 
